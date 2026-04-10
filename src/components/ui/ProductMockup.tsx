@@ -36,22 +36,40 @@ export function ProductMockup() {
         <div className="px-5 pb-5 bg-[#f9fafb]">
           {/* Bot Status Card */}
           <div
-            className="rounded-xl p-4 mb-4 text-white"
+            className="rounded-xl p-3.5 mb-2.5 text-white"
             style={{ background: "linear-gradient(135deg, #0088CC 0%, #00B4D8 100%)" }}
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="font-bold text-sm">Telegram Bot Connected</div>
-                  <div className="text-xs opacity-90">@Testbot15454_bot</div>
+                  <div className="font-bold text-xs">Telegram Bot</div>
+                  <div className="text-[10px] opacity-90">@Testbot15454_bot</div>
                 </div>
               </div>
-              <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/20">
+              <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/20">
+                Active
+              </span>
+            </div>
+          </div>
+
+          {/* Phone Status Card */}
+          <div className="rounded-xl p-3.5 mb-4 text-white" style={{ background: "linear-gradient(135deg, #7C4DFF 0%, #B388FF 100%)" }}>
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-sm">
+                  📱
+                </div>
+                <div>
+                  <div className="font-bold text-xs">Phone Number</div>
+                  <div className="text-[10px] opacity-90">+1 •••• ••89 · @JohnFromAcme</div>
+                </div>
+              </div>
+              <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-white/20">
                 Active
               </span>
             </div>

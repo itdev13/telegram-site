@@ -27,24 +27,34 @@ const faqItems = [
       "Yes! We're an approved GHL Marketplace integration. Install directly from your GoHighLevel account — completely free to install.",
   },
   {
+    question: "What's the difference between Bot and Phone connection?",
+    answer:
+      "Bot connection uses the Telegram Bot API — customers message your branded bot and conversations appear in GHL. Phone connection logs in with your personal Telegram account so you can send messages as yourself. You can run both simultaneously on the same GHL location.",
+  },
+  {
     question: "How do I connect my Telegram bot?",
     answer:
       "Create a bot with @BotFather on Telegram, copy your bot token, and paste it in TeleSync settings. Connection takes under 60 seconds — no coding required.",
   },
   {
+    question: "How does the Phone Number login work?",
+    answer:
+      "Enter your phone number in TeleSync, verify the SMS code Telegram sends you, and optionally enter your 2FA password if you have Cloud Password enabled. Your personal Telegram account is then connected and you can send messages as yourself via GHL workflows.",
+  },
+  {
     question: "What triggers are available for GHL workflows?",
     answer:
-      "TeleSync provides 6 triggers: New Message Received, Bot Started (/start), Contact Joined Group, Media Received (photos, videos, documents), Command Received (custom /commands), and Callback Query (inline button clicks).",
+      "TeleSync provides 6 triggers: New Message Received, New Subscriber, Bot Command (/start, /help, etc.), Media Received (photos, videos, documents), Contact Reactivated (replies after 7+ days silence), and Message Failed (delivery failures).",
   },
   {
     question: "What actions can I use in workflows?",
     answer:
-      "11 actions are available: Send Message, Send Photo, Send Document, Send Video, Reply to Message, Send to Group, React with Emoji, Pin Message, Edit Message, Delete Message, and Forward Message.",
+      "11 actions are available: Send Message, Send with Buttons (inline keyboard), Send via Phone (personal account), Send to Group, React with Emoji, Forward Message, Pin Message, Edit Message, Delete Message, Generate Invite Link, and Edit Group Permissions.",
   },
   {
     question: "How does the pricing work?",
     answer:
-      "Simple usage-based pricing at $0.001 per message processed. That's just $1.00 per 1,000 messages. All charges go through your GHL Wallet — no external payments needed.",
+      "Pay-as-you-go pricing: inbound and outbound messages are $0.01 each, workflow actions range from $0.01–$0.03 per execution, and some actions (forward, pin, edit, delete) are free. All charges go through your GHL Wallet — no external payments needed.",
   },
   {
     question: "Can I send messages to Telegram groups?",
@@ -59,7 +69,7 @@ const faqItems = [
   {
     question: "Is my data safe?",
     answer:
-      "Absolutely. We use OAuth 2.0, encrypted tokens, and automatic token refresh. We're GDPR compliant and we never store message content — only routing metadata.",
+      "Absolutely. We use OAuth 2.0, AES-256-GCM encryption for all stored tokens, and automatic token refresh. We're GDPR compliant and we never store message content — only routing metadata.",
   },
 ];
 
@@ -178,7 +188,7 @@ export default function Home() {
             {/* Right content - Product mockup */}
             <div className="relative hidden lg:block ml-8">
               <div className="absolute -left-32 top-1/4 z-20 transform -rotate-6">
-                <HandArrow direction="right" text="connect your bot" textClassName="text-2xl" />
+                <HandArrow direction="right" text="bot + phone" textClassName="text-2xl" />
               </div>
 
               <div
@@ -511,17 +521,17 @@ export default function Home() {
 
               <div className="space-y-3">
                 {[
-                  { icon: "📤", name: "Send Message", desc: "Send text message via Telegram" },
-                  { icon: "🖼️", name: "Send Photo", desc: "Send an image to a contact or group" },
-                  { icon: "📄", name: "Send Document", desc: "Send files and documents" },
-                  { icon: "🎬", name: "Send Video", desc: "Send video content" },
-                  { icon: "↩️", name: "Reply to Message", desc: "Reply to a specific message in thread" },
-                  { icon: "👥", name: "Send to Group", desc: "Broadcast message to a Telegram group" },
+                  { icon: "📤", name: "Send Message", desc: "Send text message via bot" },
+                  { icon: "🔘", name: "Send with Buttons", desc: "Send message with inline keyboard" },
+                  { icon: "📱", name: "Send via Phone", desc: "Send as your personal account" },
+                  { icon: "👥", name: "Send to Group", desc: "Broadcast to a Telegram group" },
                   { icon: "😀", name: "React with Emoji", desc: "Add emoji reaction to a message" },
+                  { icon: "↗️", name: "Forward Message", desc: "Forward message to another chat" },
                   { icon: "📌", name: "Pin Message", desc: "Pin important messages in chats" },
                   { icon: "✏️", name: "Edit Message", desc: "Edit a previously sent message" },
                   { icon: "🗑️", name: "Delete Message", desc: "Delete a message from chat" },
-                  { icon: "↗️", name: "Forward Message", desc: "Forward message to another chat" },
+                  { icon: "🔗", name: "Generate Invite Link", desc: "Create group/channel invite links" },
+                  { icon: "⚙️", name: "Edit Group Permissions", desc: "Manage group settings from GHL" },
                 ].map((action) => (
                   <div
                     key={action.name}
@@ -604,6 +614,10 @@ export default function Home() {
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3">
                   <span className="text-lg">⭐</span>
+                  <span className="text-gray-700">Bot + Phone connections (run both simultaneously)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-lg">⭐</span>
                   <span className="text-gray-700">6 workflow triggers + 11 workflow actions</span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -612,39 +626,60 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-lg">⭐</span>
-                  <span className="text-gray-700">Group broadcasting &amp; rich media support</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">⭐</span>
-                  <span className="text-gray-700">Automatic GHL Wallet payment</span>
+                  <span className="text-gray-700">Automatic GHL Wallet payment — no subscriptions</span>
                 </div>
               </div>
 
               <hr className="border-gray-200 mb-6" />
 
-              {/* Pricing Table */}
-              <h3 className="font-bold text-lg mb-4">Message Pricing</h3>
+              {/* Messaging Pricing */}
+              <h3 className="font-bold text-lg mb-4">Messaging</h3>
               <div className="bg-gray-50 rounded-xl border-2 border-gray-200 overflow-hidden mb-6">
                 <div className="grid grid-cols-2 bg-gray-100 font-bold text-sm p-3">
-                  <div>Volume</div>
+                  <div>Type</div>
                   <div>Price</div>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-t border-gray-200">
-                  <div className="text-gray-700">Per Message</div>
-                  <div className="font-semibold">$0.001</div>
+                  <div className="text-gray-700">Inbound Message</div>
+                  <div className="font-semibold">$0.01</div>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-t border-gray-200">
-                  <div className="text-gray-700">Per 1,000 messages</div>
-                  <div className="font-semibold">$1.00</div>
+                  <div className="text-gray-700">Outbound Message</div>
+                  <div className="font-semibold">$0.01</div>
                 </div>
-                <div className="grid grid-cols-2 p-3 border-t border-gray-200 bg-indigo-50">
-                  <div className="text-indigo-600 font-semibold">Per 10,000 messages</div>
-                  <div className="text-indigo-600 font-semibold">$10.00</div>
+              </div>
+
+              {/* Action Pricing */}
+              <h3 className="font-bold text-lg mb-4">Workflow Actions</h3>
+              <div className="bg-gray-50 rounded-xl border-2 border-gray-200 overflow-hidden mb-6">
+                <div className="grid grid-cols-2 bg-gray-100 font-bold text-sm p-3">
+                  <div>Action</div>
+                  <div>Price</div>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-t border-gray-200">
+                  <div className="text-gray-700">Send / Send with Buttons / Send via Phone / Send to Group</div>
+                  <div className="font-semibold">$0.02</div>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-t border-gray-200">
+                  <div className="text-gray-700">React with Emoji / Generate Invite Link</div>
+                  <div className="font-semibold">$0.01–$0.02</div>
+                </div>
+                <div className="grid grid-cols-2 p-3 border-t border-gray-200">
+                  <div className="text-gray-700">Edit Group Permissions</div>
+                  <div className="font-semibold">$0.03</div>
                 </div>
                 <div className="grid grid-cols-2 p-3 border-t border-gray-200 bg-green-50">
-                  <div className="font-bold">Per 100,000 messages</div>
-                  <div className="font-bold">$100.00</div>
+                  <div className="text-green-700 font-semibold">Forward / Pin / Edit / Delete</div>
+                  <div className="text-green-700 font-semibold">Free</div>
                 </div>
+              </div>
+
+              {/* Example */}
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
+                <h4 className="font-bold text-sm text-blue-900 mb-2">Example Monthly Cost</h4>
+                <p className="text-xs text-blue-800 leading-relaxed">
+                  1,000 inbound + 1,000 outbound messages + 200 workflow actions = ~<strong>$24/month</strong>
+                </p>
               </div>
 
               <hr className="border-gray-200 mb-6" />
