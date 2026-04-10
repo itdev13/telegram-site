@@ -86,6 +86,9 @@ export default function Home() {
             <a href="#faq" className="font-medium text-gray-800 hover:text-black transition-colors">
               FAQ
             </a>
+            <a href="/support" className="font-medium text-gray-800 hover:text-black transition-colors">
+              Support
+            </a>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -120,12 +123,12 @@ export default function Home() {
               </h1>
 
               <p className="text-xl text-gray-700 max-w-lg leading-relaxed">
-                Two-way Telegram integration for GHL. Send and receive messages, automate workflows with 6 triggers and 11 actions — all from your CRM.
+                Two-way Telegram integration for GHL. Connect via Bot API or your personal phone number. Automate workflows with 6 triggers and 11 actions — all from your CRM.
               </p>
 
               <div className="inline-block bg-blue-100 px-5 py-3 rounded-full border-2 border-blue-300">
                 <span className="font-bold text-blue-800">
-                  ⚡ 6 Triggers · 11 Actions · Two-Way Sync · Group Messaging
+                  ⚡ Bot + Phone · 6 Triggers · 11 Actions · Two-Way Sync
                 </span>
               </div>
 
@@ -138,14 +141,14 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="flex flex-wrap gap-8 text-sm">
+              <div className="flex flex-wrap gap-6 text-sm">
                 <span className="flex items-center gap-2">
                   <span className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
                     <svg className="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </span>
-                  <span>Two-Way Messaging</span>
+                  <span>Bot API + Phone Login</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
@@ -257,17 +260,80 @@ export default function Home() {
             How It Works
           </h2>
           <p className="text-center text-gray-600 mb-16 max-w-xl mx-auto">
-            Connect Telegram to GHL in under 2 minutes — no coding required
+            Two ways to connect — pick the one that fits your use case
           </p>
 
+          {/* Connection types */}
+          <div className="grid md:grid-cols-2 gap-6 mb-16">
+            <Card hover={false} className="shadow-[6px_6px_0_0_#000]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-200 border-2 border-black shadow-[3px_3px_0_0_#000] flex items-center justify-center text-2xl">
+                  🤖
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl">Telegram Bot</h3>
+                  <span className="text-xs font-semibold text-green-700 bg-green-100 px-2 py-0.5 rounded-full">Recommended</span>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                Create a bot via @BotFather, paste the token in TeleSync, and you&apos;re live. Best for customer support and lead capture — customers message your bot, conversations appear in GHL.
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Customers message your branded bot
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> All 6 triggers + 11 actions available
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Group broadcasting support
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Setup in 30 seconds
+                </div>
+              </div>
+            </Card>
+
+            <Card hover={false} className="shadow-[6px_6px_0_0_#000]">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-purple-200 border-2 border-black shadow-[3px_3px_0_0_#000] flex items-center justify-center text-2xl">
+                  📱
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl">Phone Number</h3>
+                  <span className="text-xs font-semibold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full">Personal Account</span>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                Log in with your personal Telegram phone number. Send messages as yourself — not a bot. Perfect for direct outreach, personal conversations, and high-touch sales.
+              </p>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Messages appear from your real account
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Send via Phone workflow action
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> 2FA support for secure login
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <span className="text-green-500">✓</span> Run both bot + phone simultaneously
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Steps */}
+          <h3 className="text-2xl font-bold text-center mb-10">Get Started in 3 Steps</h3>
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div className="text-center">
               <div className="w-20 h-20 rounded-2xl bg-blue-200 border-2 border-black shadow-[4px_4px_0_0_#000] flex items-center justify-center text-4xl mx-auto mb-6">
-                🤖
+                📥
               </div>
-              <h3 className="font-bold text-2xl mb-3">1. Create Your Bot</h3>
+              <h3 className="font-bold text-2xl mb-3">1. Install from Marketplace</h3>
               <p className="text-gray-600 leading-relaxed">
-                Open @BotFather on Telegram, create a new bot, and copy your bot token. Takes 30 seconds.
+                Find TeleSync in the GHL Marketplace and install it with one click. Free to install — no credit card required.
               </p>
             </div>
 
@@ -275,9 +341,9 @@ export default function Home() {
               <div className="w-20 h-20 rounded-2xl bg-green-200 border-2 border-black shadow-[4px_4px_0_0_#000] flex items-center justify-center text-4xl mx-auto mb-6">
                 🔗
               </div>
-              <h3 className="font-bold text-2xl mb-3">2. Connect in TeleSync</h3>
+              <h3 className="font-bold text-2xl mb-3">2. Connect Bot or Phone</h3>
               <p className="text-gray-600 leading-relaxed">
-                Paste your bot token in TeleSync settings. We verify the connection instantly and your bot goes live.
+                Paste your bot token from @BotFather — or log in with your phone number. You can run both at the same time.
               </p>
             </div>
 
@@ -334,6 +400,16 @@ export default function Home() {
             />
 
             <FeatureCard
+              icon="📱"
+              title="Phone Number Login"
+              description="Connect your personal Telegram account via phone number. Send messages as yourself — not a bot. Perfect for direct outreach and high-touch sales. Run both bot + phone simultaneously."
+              badge="⭐ UNIQUE"
+              badgeColor="#E1BEE7"
+              iconBgColor="#E8EAF6"
+              accentColor="#7C4DFF"
+            />
+
+            <FeatureCard
               icon="👥"
               title="Group Broadcasting"
               description="Add your bot to Telegram groups and broadcast messages from GHL workflows. Perfect for announcements, updates, and community engagement."
@@ -348,18 +424,26 @@ export default function Home() {
               iconBgColor="#FDE68A"
               accentColor="#D97706"
             />
+
+            <FeatureCard
+              icon="🔗"
+              title="Multi-Connection Support"
+              description="Run a Telegram Bot and Phone Number connection at the same time on the same location. Use the bot for inbound support and your phone for personal outreach."
+              iconBgColor="#FCE4EC"
+              accentColor="#E91E63"
+            />
           </div>
 
           <div className="mt-12 text-center">
             <div className="inline-flex flex-wrap justify-center gap-4">
               <span className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-black/20 font-medium">
+                ✓ Bot + Phone Connections
+              </span>
+              <span className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-black/20 font-medium">
                 ✓ GHL Conversations Sync
               </span>
               <span className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-black/20 font-medium">
-                ✓ Workflow Triggers
-              </span>
-              <span className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-black/20 font-medium">
-                ✓ Workflow Actions
+                ✓ Workflow Triggers &amp; Actions
               </span>
               <span className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-black/20 font-medium">
                 ✓ Group Support
@@ -393,12 +477,12 @@ export default function Home() {
 
               <div className="space-y-3">
                 {[
-                  { icon: "💬", name: "New Message Received", desc: "Contact sends a text message to your bot" },
-                  { icon: "🚀", name: "Bot Started (/start)", desc: "New user starts your Telegram bot" },
-                  { icon: "👥", name: "Contact Joined Group", desc: "Someone joins a group your bot monitors" },
-                  { icon: "📸", name: "Media Received", desc: "Photo, video, or document sent to bot" },
-                  { icon: "⌨️", name: "Command Received", desc: "Custom /command sent to your bot" },
-                  { icon: "🔘", name: "Callback Query", desc: "Inline keyboard button clicked" },
+                  { icon: "💬", name: "New Message Received", desc: "Contact sends a text message to your bot or phone" },
+                  { icon: "🚀", name: "New Subscriber", desc: "New user starts your Telegram bot" },
+                  { icon: "⌨️", name: "Bot Command", desc: "Custom /start, /help, or any command" },
+                  { icon: "📸", name: "Media Received", desc: "Photo, video, or document sent" },
+                  { icon: "🔄", name: "Contact Reactivated", desc: "Contact replies after 7+ days of silence" },
+                  { icon: "⚠️", name: "Message Failed", desc: "Outbound message delivery failed" },
                 ].map((trigger) => (
                   <div
                     key={trigger.name}
@@ -721,6 +805,9 @@ export default function Home() {
                 </li>
                 <li>
                   <a href="mailto:hello@vaultsuite.store" className="hover:opacity-80 transition-opacity">Contact</a>
+                </li>
+                <li>
+                  <a href="/support" className="hover:opacity-80 transition-opacity">Support</a>
                 </li>
               </ul>
             </div>
