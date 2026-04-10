@@ -1,4 +1,0 @@
-:HL["/_next/static/chunks/a4e6495e46bb1642.css","style"]
-:HL["/_next/static/media/a85fe84266768609-s.p.e658778d.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/telesync-icon.svg","image"]
-0:{"buildId":"upA6FazbJFkIO8TClgeaV","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
