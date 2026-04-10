@@ -24,7 +24,7 @@ export function ProductMockup() {
               Connection
             </div>
             <div className="px-5 py-1.5 rounded-lg text-xs font-medium text-gray-500">
-              Workflows
+              Automation
             </div>
             <div className="px-5 py-1.5 rounded-lg text-xs font-medium text-gray-500">
               Support
